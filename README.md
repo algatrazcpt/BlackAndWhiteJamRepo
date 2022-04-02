@@ -1,3 +1,2 @@
 # BlackAndWhiteJamRepo
-# Using Unity Version 2020.3.30f1
-
+Black and white jam repo
