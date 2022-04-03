@@ -5,8 +5,9 @@ using UnityEngine;
 public class GameSettings : MonoBehaviour
 {
     public static GameSettings Instance;
-    private float volume;
-
+    public bool isSettingsOneOpen = true;
+    private float volume=0.5f;
+    public bool isGame=false;
     public float Volume { get => volume; set => volume = value; }
 
     private void Awake()
@@ -19,6 +20,17 @@ public class GameSettings : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+    }
+    public void TimeControl(bool value)
+    {
+        if(value)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
     }
 
 }
