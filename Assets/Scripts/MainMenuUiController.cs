@@ -22,8 +22,9 @@ public class MainMenuUiController : MonoBehaviour
     {
         settingsMenuUicontroller.isMainMenuScene = false;
         settingsMenuUicontroller.SettingsMenuShow();
-        SceneManager.LoadScene(gameSceneName);
         gameObject.SetActive(false);
+        SceneManager.LoadScene(gameSceneName);
+        
 
     }
     public void SettingsMenuShow()
