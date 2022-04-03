@@ -5,41 +5,34 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class SettingsMenuController : MonoBehaviour
 {
-    public static SettingsMenuController Instance;
-    public GameSettings gameSettings;
-    public GameObject mainMenuUi;
+    private GameSettings gameSettings=GameSettings.Instance;
     public Button exitMenuButton;
-    public Button mainMenuReturnButton;
     public Slider volumeSlider;
-    private float volume = 0.5f;
-    public bool isMainMenuScene=true;
-    public string mainMenuSceneName = "MainMenu";
-    private void Awake()
-    {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
+    private float volume;
+    private string activeSceneName;
+    private string mainMenuSceneName = "MainMenu2";
+    private string gameMenuSceneName = "Sample";
     void Start()
     {
-
-        exitMenuButton.onClick.AddListener(SettingsMenuClose);
-        mainMenuReturnButton.onClick.AddListener(MainMenuReturn);
+        gameSettings.isSettingsOneOpen = false;
+        exitMenuButton.onClick.AddListener(MainMenuReturn);
+        volume= gameSettings.Volume;
+        volumeSlider.value = gameSettings.Volume;
         volumeSlider.onValueChanged.AddListener(VolumeSet);
-        gameObject.SetActive(false);
-        gameSettings = GameObject.Find("GameSettings").GetComponent<GameSettings>();
-        gameSettings.Volume = volume;
+        if (gameSettings.isGame)
+        {
+            exitMenuButton.GetComponentInChildren<Text>().text = "Return Game";
+            activeSceneName = gameMenuSceneName;
+        }
+        else
+        {
+            exitMenuButton.GetComponentInChildren<Text>().text = "Return Main Menu";
+            activeSceneName = mainMenuSceneName;
+        }
     }
-
     void VolumeSet(float value)
     {
         volume = value;
-        gameSettings = GameObject.Find("GameSettings").GetComponent<GameSettings>();
         gameSettings.Volume = value;
     }
     public float VolumeGet()
@@ -49,34 +42,19 @@ public class SettingsMenuController : MonoBehaviour
 
     public void MainMenuReturn()
     {
-        SceneManager.LoadScene(mainMenuSceneName);
-        SettingsMenuClose();
         
-    }
-    public void SettingsMenuShow()
-    {
-        if(isMainMenuScene)
+        if(gameSettings.isGame)
         {
-            gameObject.SetActive(true);
-            mainMenuReturnButton.gameObject.SetActive(false);
-            
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName(gameMenuSceneName));
+            SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("Setting"));
+            gameSettings.isSettingsOneOpen = true;
+            gameSettings.TimeControl(false);
+
         }
         else
         {
-            gameObject.SetActive(true);
-            mainMenuReturnButton.gameObject.SetActive(true);
-        }
-    }
-    public void SettingsMenuClose()
-    {
-        if(isMainMenuScene)
-        {
-            mainMenuUi.SetActive(true);
-            gameObject.SetActive(false);
-        }
-        else
-        {
-            gameObject.SetActive(false);
+            SceneManager.LoadScene(activeSceneName);
+            gameSettings.isSettingsOneOpen = true;
         }
     }
 }

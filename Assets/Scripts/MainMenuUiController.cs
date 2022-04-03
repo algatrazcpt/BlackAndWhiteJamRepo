@@ -12,16 +12,11 @@ public class MainMenuUiController : MonoBehaviour
     
     private void Start()
     {
-
-        settingsMenuUicontroller = SettingsMenuController.Instance;
-        SettingsMenuController.Instance.mainMenuUi = gameObject;
         startButton.onClick.AddListener(StartNewGame);
         settingsButton.onClick.AddListener(SettingsMenuShow);
     }
     public void StartNewGame()
     {
-        settingsMenuUicontroller.isMainMenuScene = false;
-        settingsMenuUicontroller.SettingsMenuShow();
         gameObject.SetActive(false);
         SceneManager.LoadScene(gameSceneName);
         
@@ -29,8 +24,6 @@ public class MainMenuUiController : MonoBehaviour
     }
     public void SettingsMenuShow()
     {
-        settingsMenuUicontroller.isMainMenuScene = true;
-        settingsMenuUicontroller.SettingsMenuShow();
         gameObject.SetActive(false);
     }
 }
