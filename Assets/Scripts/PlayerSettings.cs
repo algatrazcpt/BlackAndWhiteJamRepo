@@ -11,7 +11,13 @@ public class PlayerSettings : MonoBehaviour
             GameSettings.Instance.isGame = true;
             GameSettings.Instance.TimeControl(true);
             SceneManager.LoadScene("Setting", LoadSceneMode.Additive);
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName("Setting"));
         }
+        else if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameSettings.Instance.isSettingsOneOpen = true;
+            SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("Setting"));
+            GameSettings.Instance.TimeControl(false);
+        }
+
     }
 }
