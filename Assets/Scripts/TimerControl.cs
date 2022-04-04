@@ -6,9 +6,9 @@ using UnityEngine.U2D;
 public class TimerControl : MonoBehaviour
 {
     public Sprite[] timeState;
-    public Animator timeAnimator;
+    public GameObject timeGameObjcet;
     public Animator particleAnimator;
-    public float animtionPlayOfSet=3f;
+    public float stateCallTime=5f;
     float minute = 0;
     float hours = 0;
     int currentStateCount = 0;
@@ -16,8 +16,8 @@ public class TimerControl : MonoBehaviour
     void Start()
     {
 
-        gameObject.GetComponent<Image>().sprite = timeState[0];
-        InvokeRepeating("TimeCounting", 0, 5);
+        timeGameObjcet.GetComponent<Image>().sprite = timeState[currentStateCount];
+        InvokeRepeating("TimeCounting", 0, stateCallTime);
         stateCount=timeState.Length;
     }
     void TimeCounting()
@@ -31,7 +31,8 @@ public class TimerControl : MonoBehaviour
         else
         {
             minute += 1;
-            TimeStateChanger();
+
+            PlayeParticle();
         }
     }
     public void TimeStateChanger()
@@ -39,15 +40,19 @@ public class TimerControl : MonoBehaviour
         currentStateCount++;
         if (currentStateCount >= stateCount)
         {
+            timeGameObjcet.GetComponent<Animator>().enabled = true;
+            timeGameObjcet.GetComponent<Animator>().SetTrigger("Crash");
+            Debug.Log("Time Finished");
             currentStateCount = 0;
+            Destroy(gameObject);
         }
-        PlayeParticle();
-        new WaitForSeconds(animtionPlayOfSet);
-        gameObject.GetComponent<Image>().sprite = timeState[currentStateCount];
+        timeGameObjcet.GetComponent<Image>().sprite = timeState[currentStateCount];
+        Debug.Log("TimeStateChange");
     }
     public void PlayeParticle()
     {
         particleAnimator.SetTrigger("ParticleT");
     }
+    
 
 }

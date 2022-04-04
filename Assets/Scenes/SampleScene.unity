@@ -713,6 +713,7 @@ GameObject:
   - component: {fileID: 1191552999}
   - component: {fileID: 1191552998}
   - component: {fileID: 1191552997}
+  - component: {fileID: 1191553000}
   m_Layer: 5
   m_Name: Particle
   m_TagString: Untagged
@@ -796,6 +797,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1191552995}
   m_CullTransparentMesh: 1
+--- !u!114 &1191553000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191552995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9e47b249ae1b7b41a06375ea39c7c28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeState:
+  - {fileID: 21300000, guid: 6209f8e24aed3384aa24b9fb0473950a, type: 3}
+  - {fileID: 21300000, guid: dd5ad054bb5593942827b5967ce11cdb, type: 3}
+  - {fileID: 21300000, guid: f8bfe8293e9006a46acefafb0c9679df, type: 3}
+  - {fileID: 21300000, guid: d21e4f65f8dae984ca9dc80fa693d2e9, type: 3}
+  - {fileID: 21300000, guid: 21cbcb63cf12a634695747e518615488, type: 3}
+  - {fileID: 21300000, guid: 3ff2ad9739e64c34689269ae378cb06f, type: 3}
+  - {fileID: 21300000, guid: d03c35cd0aaa86c4b989c01da5ade3ab, type: 3}
+  - {fileID: 21300000, guid: 530f78c9c5a16cb4696ac973806bf1c7, type: 3}
+  - {fileID: 21300000, guid: 5763a486f9a6872498067cafa1fb3292, type: 3}
+  - {fileID: 21300000, guid: c77100c265e25aa4a973251346df73f9, type: 3}
+  - {fileID: 21300000, guid: 81ca3283bc5379d428c87969c8589d90, type: 3}
+  - {fileID: 21300000, guid: 4abd3a5f30ed08c4380bf09439211e3c, type: 3}
+  - {fileID: 21300000, guid: 7c7fd82629720ed4099903517b729f5a, type: 3}
+  - {fileID: 21300000, guid: 3b987dd2af11f12478067aa470a5f27d, type: 3}
+  - {fileID: 21300000, guid: cc83592e36be5fb45b1ab5119d6b26aa, type: 3}
+  - {fileID: 21300000, guid: 0ad115acbd6a8264b8bc78f2550929b6, type: 3}
+  timeGameObjcet: {fileID: 1509027480}
+  particleAnimator: {fileID: 1191552997}
+  stateCallTime: 2.5
 --- !u!1 &1281314812
 GameObject:
   m_ObjectHideFlags: 0
@@ -890,7 +923,6 @@ GameObject:
   - component: {fileID: 1313989011}
   - component: {fileID: 1313989010}
   - component: {fileID: 1313989009}
-  - component: {fileID: 1313989008}
   m_Layer: 5
   m_Name: GameUi
   m_TagString: Untagged
@@ -898,38 +930,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1313989008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1313989007}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9e47b249ae1b7b41a06375ea39c7c28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeState:
-  - {fileID: 21300000, guid: 6209f8e24aed3384aa24b9fb0473950a, type: 3}
-  - {fileID: 21300000, guid: dd5ad054bb5593942827b5967ce11cdb, type: 3}
-  - {fileID: 21300000, guid: f8bfe8293e9006a46acefafb0c9679df, type: 3}
-  - {fileID: 21300000, guid: d21e4f65f8dae984ca9dc80fa693d2e9, type: 3}
-  - {fileID: 21300000, guid: 21cbcb63cf12a634695747e518615488, type: 3}
-  - {fileID: 21300000, guid: 3ff2ad9739e64c34689269ae378cb06f, type: 3}
-  - {fileID: 21300000, guid: d03c35cd0aaa86c4b989c01da5ade3ab, type: 3}
-  - {fileID: 21300000, guid: 530f78c9c5a16cb4696ac973806bf1c7, type: 3}
-  - {fileID: 21300000, guid: 5763a486f9a6872498067cafa1fb3292, type: 3}
-  - {fileID: 21300000, guid: c77100c265e25aa4a973251346df73f9, type: 3}
-  - {fileID: 21300000, guid: 81ca3283bc5379d428c87969c8589d90, type: 3}
-  - {fileID: 21300000, guid: 4abd3a5f30ed08c4380bf09439211e3c, type: 3}
-  - {fileID: 21300000, guid: 7c7fd82629720ed4099903517b729f5a, type: 3}
-  - {fileID: 21300000, guid: 3b987dd2af11f12478067aa470a5f27d, type: 3}
-  - {fileID: 21300000, guid: cc83592e36be5fb45b1ab5119d6b26aa, type: 3}
-  - {fileID: 21300000, guid: 0ad115acbd6a8264b8bc78f2550929b6, type: 3}
-  timeAnimator: {fileID: 1509027482}
-  particleAnimator: {fileID: 1191552997}
-  animtionPlayOfSet: 3
 --- !u!114 &1313989009
 MonoBehaviour:
   m_ObjectHideFlags: 0
