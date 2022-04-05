@@ -21,6 +21,18 @@ public class GameSettings : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
+    public void MenuSongs(bool value)
+    {
+        if (value)
+        {
+            gameObject.GetComponent<AudioSource>().enabled = true;
+        }
+        else
+        {
+            gameObject.GetComponent<AudioSource>().enabled = false;
+        }
+    }
+
     public void TimeControl(bool value)
     {
         if(value)

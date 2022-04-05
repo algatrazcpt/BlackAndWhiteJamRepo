@@ -7,31 +7,57 @@ public class SettingsMenuController : MonoBehaviour
 {
     private GameSettings gameSettings=GameSettings.Instance;
     public Button exitMenuButton;
+    public Image exitMenuButtonImage;
     public Slider volumeSlider;
+    public Animator volumeBarAnimator;
+    public Sprite[] menuSprite;
     private float volume;
     private string activeSceneName;
     private string mainMenuSceneName = "MainMenu2";
-    private string gameMenuSceneName = "Sample";
+    private string gameMenuSceneName = "SampleScene";
     void Start()
     {
         gameSettings.isSettingsOneOpen = false;
+        //change scene
         exitMenuButton.onClick.AddListener(MainMenuReturn);
+        exitMenuButtonImage.GetComponent<Button>().onClick.AddListener(MainMenuReturn);
+        //
         volume= gameSettings.Volume;
         volumeSlider.value = gameSettings.Volume;
         volumeSlider.onValueChanged.AddListener(VolumeSet);
         if (gameSettings.isGame)
         {
-            exitMenuButton.GetComponentInChildren<Text>().text = "Return Game";
+            exitMenuButtonImage.sprite = menuSprite[0];
             activeSceneName = gameMenuSceneName;
         }
         else
         {
-            exitMenuButton.GetComponentInChildren<Text>().text = "Return Main Menu";
+            //Menu Songs
+            GameSettings.Instance.MenuSongs(true);
+            //MenuSongs
+            exitMenuButtonImage.sprite = menuSprite[1];
             activeSceneName = mainMenuSceneName;
         }
     }
     void VolumeSet(float value)
     {
+        if(value>volume)
+        {
+            Debug.Log("Volume Poz");
+            volumeBarAnimator.SetTrigger("VolumePT");
+        }
+        else if(value < volume)
+        {
+            Debug.Log("Volume Neg");
+            volumeBarAnimator.SetTrigger("VolumeNT");
+        }
+        else
+        {
+            volume -= 1;
+        }
+        Debug.Log("Workingh");
+
+
         volume = value;
         gameSettings.Volume = value;
     }

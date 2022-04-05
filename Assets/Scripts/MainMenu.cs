@@ -9,6 +9,7 @@ public class MainMenu : MonoBehaviour
     void Start()
     {
         GameSettings.Instance.isGame = false;
+        GameSettings.Instance.MenuSongs(true);
     }
 
     // Update is called once per frame
@@ -24,6 +25,7 @@ public class MainMenu : MonoBehaviour
 
     public void Play()
     {
-        SceneManager.LoadScene("Sample");
+        GameSettings.Instance.MenuSongs(false);
+        SceneManager.LoadScene("SampleScene");
     }
 }

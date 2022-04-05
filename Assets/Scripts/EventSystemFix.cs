@@ -17,4 +17,5 @@ public class EventSystemFix : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
+
 }
