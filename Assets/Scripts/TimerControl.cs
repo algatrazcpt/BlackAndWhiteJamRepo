@@ -38,7 +38,8 @@ public class TimerControl : MonoBehaviour
     public void TimeStateChanger()
     {
         currentStateCount++;
-        if (currentStateCount >= stateCount)
+        Debug.Log(currentStateCount);
+        if (currentStateCount > stateCount-1)
         {
             timeGameObjcet.GetComponent<Animator>().enabled = true;
             timeGameObjcet.GetComponent<Animator>().SetTrigger("Crash");

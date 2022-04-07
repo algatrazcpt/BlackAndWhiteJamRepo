@@ -26,6 +26,6 @@ public class MainMenu : MonoBehaviour
     public void Play()
     {
         GameSettings.Instance.MenuSongs(false);
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("TesLevel");
     }
 }

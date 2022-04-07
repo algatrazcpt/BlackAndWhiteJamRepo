@@ -12,9 +12,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Blocking
+  - Actor
+  - Floor
   - 
   - 
   - 
@@ -41,4 +41,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Actor
+    uniqueID: 3428859991
+    locked: 0
+  - name: Floor
+    uniqueID: 1104419181
     locked: 0

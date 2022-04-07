@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Setting.unity
     guid: 040d439f625d5f64fa1017010278e586
+  - enabled: 1
+    path: Assets/Scenes/TesLevel.unity
+    guid: 0028217c427c75d4fa1464267c5bc9ec
   m_configObjects: {}
