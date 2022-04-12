@@ -14,7 +14,7 @@ public class SettingsMenuController : MonoBehaviour
     private float volume;
     private string activeSceneName;
     private string mainMenuSceneName = "MainMenu2";
-    private string gameMenuSceneName = "SampleScene";
+    private string gameMenuSceneName = "Level";
     void Start()
     {
         gameSettings.isSettingsOneOpen = false;

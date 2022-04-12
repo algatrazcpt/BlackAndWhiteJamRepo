@@ -18,6 +18,10 @@ public class PlayerSettings : MonoBehaviour
             SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("Setting"));
             GameSettings.Instance.TimeControl(false);
         }
+        else if(Input.GetKeyDown(KeyCode.Backspace))
+        {
+            SceneManager.LoadScene("Level");
+        }
 
     }
 }

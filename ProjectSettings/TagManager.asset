@@ -4,7 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Bullet
+  - RituelPoint
+  - WallTag
+  - FriendlyFire
   layers:
   - Default
   - TransparentFX
@@ -13,10 +15,10 @@ TagManager:
   - Water
   - UI
   - Blocking
+  - TriggerRituel
   - 
-  - Floor
   - Actor
-  - 
+  - RituelPoint
   - 
   - 
   - 
@@ -42,11 +44,11 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Actor
-    uniqueID: 3428859991
-    locked: 0
   - name: Floor
     uniqueID: 1104419181
+    locked: 0
+  - name: Actor
+    uniqueID: 3428859991
     locked: 0
   - name: TestLayer
     uniqueID: 3783002969
