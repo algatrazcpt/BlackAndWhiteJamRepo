@@ -215,8 +215,8 @@ GameObject:
   - component: {fileID: 202807945}
   - component: {fileID: 202807944}
   - component: {fileID: 202807947}
-  m_Layer: 5
-  m_Name: SettingBut
+  m_Layer: 0
+  m_Name: SettingButtons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -532,8 +532,8 @@ GameObject:
   - component: {fileID: 338445951}
   - component: {fileID: 338445950}
   - component: {fileID: 338445953}
-  m_Layer: 5
-  m_Name: PlayBut
+  m_Layer: 0
+  m_Name: PlayButtons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -682,7 +682,7 @@ GameObject:
   m_Component:
   - component: {fileID: 775637714}
   - component: {fileID: 775637715}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: MainMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -722,6 +722,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63ec688d82a96c84cb3d26bddc7329f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playSceneName: OpenLevel
 --- !u!1 &1328178806
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,7 +736,7 @@ GameObject:
   - component: {fileID: 1328178810}
   - component: {fileID: 1328178809}
   - component: {fileID: 1328178808}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: SettingsImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -885,8 +886,8 @@ GameObject:
   - component: {fileID: 1565409802}
   - component: {fileID: 1565409804}
   - component: {fileID: 1565409803}
-  m_Layer: 5
-  m_Name: Background
+  m_Layer: 0
+  m_Name: BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -910,7 +911,7 @@ RectTransform:
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &1565409803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -960,6 +961,7 @@ GameObject:
   - component: {fileID: 1618248413}
   - component: {fileID: 1618248412}
   - component: {fileID: 1618248411}
+  - component: {fileID: 1618248414}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -984,7 +986,7 @@ Camera:
   m_GameObject: {fileID: 1618248410}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -1032,6 +1034,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1618248414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618248410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &1750563927
 GameObject:
   m_ObjectHideFlags: 0
@@ -1045,7 +1080,7 @@ GameObject:
   - component: {fileID: 1750563931}
   - component: {fileID: 1750563930}
   - component: {fileID: 1750563929}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: PlayImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1196,8 +1231,8 @@ GameObject:
   - component: {fileID: 2014229470}
   - component: {fileID: 2014229469}
   - component: {fileID: 2014229468}
-  m_Layer: 5
-  m_Name: Canvas
+  m_Layer: 0
+  m_Name: Ui
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1215,11 +1250,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
+  m_IgnoreReversedGraphics: 0
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
 --- !u!114 &2014229469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1232,10 +1267,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -1260,7 +1295,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
