@@ -24,7 +24,6 @@ public class PlayerControl : MonoBehaviour
             rituelCast = true;
             rituelPoint = false;
             animator.SetTrigger("MagicChargeT");
-            RituelRegionDelete(CurrentRituel);
         }
          if (Input.GetKeyDown(KeyCode.R)&rituelCast==true)
         {
