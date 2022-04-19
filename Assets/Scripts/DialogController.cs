@@ -30,6 +30,17 @@ public class DialogController : MonoBehaviour
             dialog›d += 1;
         }
     }
+    public bool MultiDialogGet(int startId,int stopId)
+    {
+        for (int a = startId; a < stopId; a++)
+        {
+
+            DialogGet();
+            Debug.Log(a);
+            new WaitForSeconds(5f);
+        }
+        return true;
+    }
     IEnumerator DialogShow()
     {
         //DialogShow
