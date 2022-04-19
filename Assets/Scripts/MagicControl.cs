@@ -10,32 +10,25 @@ public class MagicControl : MonoBehaviour
     public GameObject firendlyFire;
     public Animator animator;
     private GameObject rituelCollider;
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
             if (rituelPoint & rituelCast == false)
             {
                 animator.SetTrigger("MagicChargeT");
                 rituelCast = true;
                 rituelPoint = false;
                 Debug.Log(rituelCollider);
-                rituelCollider.SetActive(false);
             }
 
-            else if (rituelCast == true)
+             if (rituelCast == true&& Input.GetKeyDown(KeyCode.R))
             {
                 FrindlyGet();
                 rituelCast = false;
 
             }
-        }
+        
     }
 
     void FrindlyGet()
