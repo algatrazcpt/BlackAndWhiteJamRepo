@@ -86,6 +86,7 @@ GameObject:
   - component: {fileID: -7823251997879061174}
   - component: {fileID: 428491021030771904}
   - component: {fileID: 6900038297143548471}
+  - component: {fileID: 5647625902035578391}
   m_Layer: 0
   m_Name: RituelGolem00
   m_TagString: Untagged
@@ -216,7 +217,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ed8871458f280447a9c5c112aef5660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gamevinner: {fileID: 0}
   Name: 
+  obsidienId: 0
+  fireShowTime: 3
   animator: {fileID: 7006239103171086452}
 --- !u!50 &6900038297143548471
 Rigidbody2D:
@@ -239,3 +243,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!114 &5647625902035578391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7006239103171086455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fd10736bdc7239428c01f0298cc3b79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allDialogs: []
+  dialogText: {fileID: 0}
+  dialogAnimator: {fileID: 0}
+  dialogShowtime: 7
+  isMissionState: 0
+  magicControl: {fileID: 0}

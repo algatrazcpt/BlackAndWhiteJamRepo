@@ -9,32 +9,32 @@ public class DialogController : MonoBehaviour
     public TMP_Text dialogText;
     public Animator dialogAnimator;
     private int dialog›d = 0;
-    public float dialogShowtime=7f;
+    public float dialogShowtime = 7f;
     int multiDialogStopCount = 0;
-    int multiDialogCount=0;
-    public bool isMissionState=false;
-    public FriendlyMagicControl magicControl; 
+    int multiDialogCount = 0;
+    public bool isMissionState = false;
+    public FriendlyMagicControl magicControl;
     public void DialogGet()
     {
         dialogText.text = allDialogs[dialog›d];
         StartCoroutine("DialogShow");
         NextDialog();
     }
-     void Update()
+    void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             DialogGet();
         }
     }
     void NextDialog()
     {
-        if (dialog›d < allDialogs.Length-1)
+        if (dialog›d < allDialogs.Length - 1)
         {
             dialog›d += 1;
         }
     }
-    public void MultiDialogGet(int startId,int stopId)
+    public void MultiDialogGet(int startId, int stopId)
     {
         dialog›d = startId;
         multiDialogStopCount = stopId;
@@ -45,6 +45,7 @@ public class DialogController : MonoBehaviour
     {
         if (multiDialogCount >= multiDialogStopCount)
         {
+            magicControl.ColliderActiviteController(true);
             StartCoroutine(magicControl.playerMoveControl(true));
             StopCoroutine(MultiDialog());
         }
@@ -52,7 +53,7 @@ public class DialogController : MonoBehaviour
         {
             multiDialogCount++;
             DialogGet();
-            yield return new WaitForSeconds(dialogShowtime+2);
+            yield return new WaitForSeconds(dialogShowtime +0.5f);
             StartCoroutine(MultiDialog());
         }
     }
@@ -63,12 +64,23 @@ public class DialogController : MonoBehaviour
         yield return new WaitForSeconds(dialogShowtime);
         //DialogClose
         dialogAnimator.SetBool("DialogStartB", false);
-       
+
 
     }
     public void CustomDialogGet(int value)
     {
         dialogText.text = allDialogs[value];
         StartCoroutine("DialogShow");
+    }
+    public void SpecialDialogGet(float time, string dialog)
+    {
+        StartCoroutine(SpecialDialogShow(time, dialog));
+    }
+    IEnumerator SpecialDialogShow(float time, string dialog)
+    {
+        dialogAnimator.SetBool("DialogStartB", true);
+        dialogText.text = dialog;
+        yield return new WaitForSeconds(time);
+        dialogAnimator.SetBool("DialogStartB", false);
     }
 }

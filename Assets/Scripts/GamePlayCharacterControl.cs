@@ -14,6 +14,7 @@ public class GamePlayCharacterControl : MonoBehaviour
     public DialogController dialogController;
     public bool rFail = true;
     public bool isShowTime=false;
+    public float fireAnimationGet = 0.3f;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -27,27 +28,33 @@ public class GamePlayCharacterControl : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
-                dialogController.CustomDialogGet(4);
+                dialogController.SpecialDialogGet(4f, dialogController.allDialogs[4]);
                 rFail = false;
                 friendlyMagicControl.Mission2();
             }
         }
-        else if(false)
+        else if(!rFail&&isShowTime)
         {
-
-        }
-
-        if (rituelPoint & rituelCast == false)
-        {
-            rituelCast = true;
-            rituelPoint = false;
-            animator.SetTrigger("MagicChargeT");
-        }
-            if (Input.GetKeyDown(KeyCode.R) & rituelCast == true)
+            if (Input.GetKeyDown(KeyCode.R))
             {
-                rituelCast = false;
-                FrindlyGet();
+                
+                if(rituelCast)
+                {
+                    AnimationPlay();
+                    rituelCast = false;
+                }
+                else
+                {
+                    if (isMoveable)
+                    {
+                        dialogController.SpecialDialogGet(3f,dialogController.allDialogs[5]);
+                    }
+
+                }
             }
+
+
+        }
         
 
     }
@@ -88,10 +95,14 @@ public class GamePlayCharacterControl : MonoBehaviour
     }
 
 
-    void FrindlyGet()
+    void AnimationPlay()
     {
         animator.SetTrigger("MagicChargeT");
-        new WaitForSeconds(0.030f);
+        Invoke("GetFire", fireAnimationGet);
+        
+    }
+    void GetFire()
+    {
         Instantiate(firendlyFire, transform.position, transform.rotation);
     }
 
@@ -102,25 +113,6 @@ public class GamePlayCharacterControl : MonoBehaviour
     public GameObject firendlyFire;
     bool isShowAfter = false;
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.name=="Teleport1")
-        {
-            if (!isShowAfter)
-            {
-                dialogController.CustomDialogGet(0);
-                friendlyMagicControl.isMission1 = true;
-            }
-        }
-        if (collision.gameObject.name == "RituelRegion")
-        {
-            if (!isShowAfter)
-            {
-                dialogController.CustomDialogGet(1);
-                friendlyMagicControl.isMission2 = true;
-            }
-        }
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.name == "Teleport1")
@@ -130,6 +122,14 @@ public class GamePlayCharacterControl : MonoBehaviour
                 dialogController.CustomDialogGet(0);
                 friendlyMagicControl.isMission1 = true;
                 isShowAfter = true;
+            }
+        }
+        else if (collision.gameObject.CompareTag("RituelPoint"))
+        {
+            if (friendlyMagicControl.isOnetime[2] == false)
+            {
+                rituelCast = true;
+                dialogController.SpecialDialogGet(2f, dialogController.allDialogs[6]);
             }
         }
     }
