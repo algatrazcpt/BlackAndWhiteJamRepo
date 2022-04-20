@@ -10,6 +10,10 @@ public class DialogController : MonoBehaviour
     public Animator dialogAnimator;
     private int dialog›d = 0;
     public float dialogShowtime=7f;
+    int multiDialogStopCount = 0;
+    int multiDialogCount=0;
+    public bool isMissionState=false;
+    public FriendlyMagicControl magicControl; 
     public void DialogGet()
     {
         dialogText.text = allDialogs[dialog›d];
@@ -30,23 +34,33 @@ public class DialogController : MonoBehaviour
             dialog›d += 1;
         }
     }
-    public bool MultiDialogGet(int startId,int stopId)
+    public void MultiDialogGet(int startId,int stopId)
     {
-        for (int a = startId; a < stopId; a++)
+        dialog›d = startId;
+        multiDialogStopCount = stopId;
+        multiDialogCount = dialog›d;
+        StartCoroutine(MultiDialog());
+    }
+    IEnumerator MultiDialog()
+    {
+        if (multiDialogCount >= multiDialogStopCount)
         {
-
-            DialogGet();
-            Debug.Log(a);
-            new WaitForSeconds(5f);
+            StartCoroutine(magicControl.playerMoveControl(true));
+            StopCoroutine(MultiDialog());
         }
-        return true;
+        else
+        {
+            multiDialogCount++;
+            DialogGet();
+            yield return new WaitForSeconds(dialogShowtime+2);
+            StartCoroutine(MultiDialog());
+        }
     }
     IEnumerator DialogShow()
     {
         //DialogShow
         dialogAnimator.SetBool("DialogStartB", true);
         yield return new WaitForSeconds(dialogShowtime);
-        Debug.Log("Not Wait");
         //DialogClose
         dialogAnimator.SetBool("DialogStartB", false);
        

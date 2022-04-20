@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ObsidenScript : MonoBehaviour
@@ -19,7 +17,7 @@ public class ObsidenScript : MonoBehaviour
             Debug.Log("Start");
             animator.SetTrigger("FireT");
             firendly = collision.gameObject;
-            Invoke("DeleteFire",3f);
+            Invoke("DeleteFire", 3f);
             gamevinner.gameObject.GetComponent<GameWinner>().column += Name;
         }
     }

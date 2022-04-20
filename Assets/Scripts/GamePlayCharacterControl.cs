@@ -10,6 +10,10 @@ public class GamePlayCharacterControl : MonoBehaviour
     private RaycastHit2D hit;
     private GameObject CurrentRituel;
     public Vector2 boxSize;
+    public FriendlyMagicControl friendlyMagicControl;
+    public DialogController dialogController;
+    public bool rFail = true;
+    public bool isShowTime=false;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -18,22 +22,38 @@ public class GamePlayCharacterControl : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (isMoveable)
+         degisken();
+        if(isShowTime&&rFail)
         {
-            degisken();
-            if (rituelPoint & rituelCast == false)
+            if (Input.GetKeyDown(KeyCode.R))
             {
-                rituelCast = true;
-                rituelPoint = false;
-                animator.SetTrigger("MagicChargeT");
+                dialogController.CustomDialogGet(4);
+                rFail = false;
+                friendlyMagicControl.Mission2();
             }
+        }
+        else if(false)
+        {
+
+        }
+
+        if (rituelPoint & rituelCast == false)
+        {
+            rituelCast = true;
+            rituelPoint = false;
+            animator.SetTrigger("MagicChargeT");
+        }
             if (Input.GetKeyDown(KeyCode.R) & rituelCast == true)
             {
                 rituelCast = false;
                 FrindlyGet();
             }
-        }
+        
 
+    }
+    public void PressRFail()
+    {
+        dialogController.CustomDialogGet(2);
     }
 
 
@@ -61,56 +81,9 @@ public class GamePlayCharacterControl : MonoBehaviour
             //transform.localScale=new  Vector3(-1, 1,1);
             transform.localScale = new Vector3(-0.16f, 0.16f, 0.16f);
         }
-        // hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(0,moveDelta.y), Mathf.Abs(moveDelta.y* Time.deltaTime), LayerMask.GetMask("Actor", "Blocking"));
-        hit = Physics2D.BoxCast(transform.position, boxSize, 0, new Vector2(0, moveDelta.y), Mathf.Abs(moveDelta.y * Time.deltaTime), LayerMask.GetMask("Actor", "Blocking"));
-        if (hit.collider == null)
+        if (isMoveable)
         {
-            //Move
-            transform.Translate(0, moveDelta.y * Time.deltaTime, 0);
-
-        }
-        else
-        {
-            if (hit.collider.CompareTag("RituelPoint"))
-            {
-                animator.SetTrigger("MagicChargeT");
-                Debug.Log(hit.collider.gameObject.tag);
-                transform.Translate(0, moveDelta.y * Time.deltaTime, 0);
-                rituelPoint = true;
-                CurrentRituel = hit.collider.gameObject;
-            }
-            else if (!hit.collider.CompareTag("WallTag"))
-            {
-                transform.Translate(0, moveDelta.y * Time.deltaTime, 0);
-                rituelPoint = false;
-                Debug.Log(hit.collider.gameObject.tag);
-            }
-        }
-
-        // hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(moveDelta.x,0), Mathf.Abs(moveDelta.x * Time.deltaTime), LayerMask.GetMask("Actor", "Blocking"));
-        hit = Physics2D.BoxCast(transform.position, boxSize, 0, new Vector2(moveDelta.x, 0), Mathf.Abs(moveDelta.x * Time.deltaTime), LayerMask.GetMask("Actor", "Blocking"));
-        if (hit.collider == null)
-        {
-            //Move
-            transform.Translate(moveDelta.x * Time.deltaTime, 0, 0);
-        }
-        else
-        {
-            if (hit.collider.CompareTag("RituelPoint"))
-            {
-                animator.SetTrigger("MagicChargeT");
-                Debug.Log(hit.collider.gameObject.tag);
-                //Move
-                transform.Translate(moveDelta.x * Time.deltaTime, 0, 0);
-                rituelPoint = true;
-                CurrentRituel = hit.collider.gameObject;
-            }
-            else if (!hit.collider.CompareTag("WallTag"))
-            {
-                transform.Translate(moveDelta.x * Time.deltaTime, 0, 0);
-                rituelPoint = false;
-                Debug.Log(hit.collider.gameObject.tag);
-            }
+            transform.position += moveDelta * Time.deltaTime;
         }
     }
 
@@ -127,10 +100,37 @@ public class GamePlayCharacterControl : MonoBehaviour
     public bool rituelPoint = true;
     public bool rituelCast = false;
     public GameObject firendlyFire;
-   
+    bool isShowAfter = false;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("collision" + collision.gameObject.name);
+        if (collision.gameObject.name=="Teleport1")
+        {
+            if (!isShowAfter)
+            {
+                dialogController.CustomDialogGet(0);
+                friendlyMagicControl.isMission1 = true;
+            }
+        }
+        if (collision.gameObject.name == "RituelRegion")
+        {
+            if (!isShowAfter)
+            {
+                dialogController.CustomDialogGet(1);
+                friendlyMagicControl.isMission2 = true;
+            }
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "Teleport1")
+        {
+            if (!isShowAfter)
+            {
+                dialogController.CustomDialogGet(0);
+                friendlyMagicControl.isMission1 = true;
+                isShowAfter = true;
+            }
+        }
     }
 }

@@ -4,49 +4,115 @@ using UnityEngine;
 
 public class FriendlyMagicControl : MonoBehaviour
 {
+    public GamePlayCharacterControl playerObject;
+    public Collider2D RituelObject1;
+    public Collider2D RituelObject2;
+    public Collider2D teleport;
     DialogController dialogController;
     public bool isMainMission = true;
-    bool isMission1=false;
-    bool isMission2 = false;
-    bool isMission3 = false;
-    bool isMission4 = false;
-    bool isMission5 = false;
-    private void Start()
+    public bool isMission1 =false;
+    public bool isMission2 = false;
+    public bool isMission3 = false;
+    public bool isMission4 = false;
+    public bool isMission5 = false;
+    public bool isDialogStart =false;
+    public int currentMissionId = 0;
+    public bool[] isOnetime = new bool[10];
+     void Start()
     {
+        for(int a=0;a<isOnetime.Length;a++)
+        {
+            isOnetime[a] = true;
+        }
+
+
         dialogController = GetComponent<DialogController>();
+        teleport.enabled=false;
+        RituelObject1.enabled=false;
+        RituelObject2.enabled = false;
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void FixedUpdate()
     {
-        Debug.Log("HElpme");
+        isMainMission= isMainMission!= dialogController.isMissionState;
+
     }
-    private void OnCollisionEnter(Collision collision)
+    public IEnumerator playerMoveControl(bool value)
     {
-        Debug.Log("HELLLLPPPP");
+        playerObject.isMoveable = value;
+        yield return null;
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+
+
+    private  void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Collision Enter");
+        isDialogStart = true;
         if (isMainMission)
         {
-            var v=dialogController.MultiDialogGet(0,4);
-
-            collision.gameObject.GetComponent<GamePlayCharacterControl>().isMoveable = false;
-            isMainMission = false;
-            if(v==true)
-            {
-                Debug.Log("Animasyon bitti");
-            }
+            dialogController.MultiDialogGet(0,5);
+            StartCoroutine(playerMoveControl(false));
+            isMainMission= false;
+            teleport.enabled = true;
         }   
         else
         {
-            if (isMission1)
+            switch(currentMissionId)
             {
-                isMission2 = true;
-            }
-            else
-            {
+                case 0:
+                    {
+                        if(isMission1)
+                        {
+                            isMission1 = true;
+                            dialogController.CustomDialogGet(5);
+                            playerObject.isShowTime = true;
+                            playerObject.PressRFail();
+                            currentMissionId = 1;
+                        }
+                        else
+                        {
 
+                            dialogController.CustomDialogGet(7);
+                        }
+                        break;
+                    }
+                case 1:
+                    {
+                        if (isMission2)
+                        {
+                            isMission2 = true;
+                           // dialogController.CustomDialogGet(5);
+                            playerObject.isShowTime = true;
+                        }
+                        else if (playerObject.rFail)
+                        {
+                            playerObject.isShowTime = true;
+                            playerObject.PressRFail();
+                            
+                            
+                        }
+                        else
+                        {
+                            if (isOnetime[2])
+                            {
+                                Mission2();
+                            }
+                            else
+                            {
+                                dialogController.CustomDialogGet(9);
+                            }
+                        }
+
+                            break;
+                    }
             }
+            
+           
         }
+        
+    }
+    public void Mission2()
+    {
+        StartCoroutine(playerMoveControl(false));
+        dialogController.MultiDialogGet(8, 9);
+        isOnetime[2] = false;
     }
 }
