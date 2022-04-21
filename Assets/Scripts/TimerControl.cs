@@ -51,6 +51,7 @@ public class TimerControl : MonoBehaviour
     public void GameOver()
     {
         playerAnimator.SetTrigger("PlayerDeathT");
+        GameSaveSystem.SaveGame(Random.Range(3,5));
         Invoke("LoadScene", 1f);
     }
     public void LoadScene()

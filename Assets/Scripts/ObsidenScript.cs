@@ -40,6 +40,7 @@ public class ObsidenScript : MonoBehaviour
                 cameraShake.CameraShakeStart(cameraShakeTime+2, cameraShakeStrong);
                 Debug.Log("Rituel Finish");
                 Invoke("GameFinish",cameraShakeTime+2);
+                GameSaveSystem.SaveGame(0);
                 
             }
             else if (!obsidienController.allObsidens[obsidienId])
@@ -49,8 +50,14 @@ public class ObsidenScript : MonoBehaviour
                     dialogController.SpecialDialogGet(3f, "I burned the obsidian, this tone scares me");
                     PlayAnimation();
                     cameraShake.CameraShakeStart(cameraShakeTime, cameraShakeWeak);
+
+                }
+                else
+                {
+                    dialogController.SpecialDialogGet(3f, "pfff Nothing happens");
                 }
             }
+
         }
     }
     void PlayAnimation()
@@ -64,7 +71,7 @@ public class ObsidenScript : MonoBehaviour
     }
     void GameFinish()
     {
-        SceneManager.LoadScene("Level");
+        SceneManager.LoadScene(Name);
     }
 
 }

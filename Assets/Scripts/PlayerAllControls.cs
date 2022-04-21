@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerAllControls : MonoBehaviour
 {
+    public string sceneName = "Level";
     Animator animator;
     private Vector3 moveDelta;
     private bool rituelCast;
@@ -13,6 +15,8 @@ public class PlayerAllControls : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         dialogController = GetComponent<DialogController>();
+        SaveData saveData = GameSaveSystem.LoadGame();
+        dialogController.SpecialDialogGet(3f,saveData.LoadDialog());
     }
     void FixedUpdate()
     {
@@ -21,6 +25,7 @@ public class PlayerAllControls : MonoBehaviour
             rituelCast = false;
             GetFire();
         }
+        PlayerMove();
     }
     void PlayerMove()
     {
@@ -60,4 +65,14 @@ public class PlayerAllControls : MonoBehaviour
                 dialogController.SpecialDialogGet(2f, dialogController.allDialogs[6]);
         }
     }
+    public void  PlayerDeath()
+    {
+       animator.SetTrigger("PlayerDeathT");
+        Invoke("DeathScene", 1.5f);
+    }
+    public void DeathScene()
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+
 }

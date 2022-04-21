@@ -42,6 +42,9 @@ public class TeleportController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        TeleportLocation();
+        if (collision.CompareTag("Player"))
+        {
+            TeleportLocation();
+        }
     }
 }
