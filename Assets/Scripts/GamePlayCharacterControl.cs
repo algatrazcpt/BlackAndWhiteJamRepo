@@ -20,9 +20,14 @@ public class GamePlayCharacterControl : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+
+
     // Update is called once per frame
     void FixedUpdate()
     {
+        ///
+        ///
+
          degisken();
         if(isShowTime&&rFail)
         {
