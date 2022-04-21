@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class ObsidenScript : MonoBehaviour
 {
+    CinemachineShakeController cameraShake;
     public GameObject gamevinner;
     public string Name = "";
     public int obsidienId = 0;
@@ -10,16 +11,15 @@ public class ObsidenScript : MonoBehaviour
     private GameObject firendly;
     private ObsidienController obsidienController;
     DialogController dialogController;
+    public float cameraShakeWeak = 0.14f;
+    public float cameraShakeStrong = 0.7f;
+    public float cameraShakeTime = 2.1f;
     private void Start()
     {
+        cameraShake = CinemachineShakeController.Instance;
         dialogController = GetComponent<DialogController>();
         obsidienController = GameObject.Find("AllObsidien").GetComponent<ObsidienController>();
         obsidienController.allObsidens[obsidienId] = false;
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-
-
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -30,14 +30,17 @@ public class ObsidenScript : MonoBehaviour
                 obsidienController.allObsidens[obsidienId] = true;
                 dialogController.SpecialDialogGet(3f, "I burned the obsidian, this tone scares me");
                 PlayAnimation();
+                cameraShake.CameraShakeStart(cameraShakeTime, cameraShakeWeak);
             }
             else if (obsidienController.allObsidens[obsidienId - 1] && obsidienId == obsidienController.allObsidensSize - 1 && !obsidienController.allObsidens[obsidienId])
             {
                 obsidienController.allObsidens[obsidienId] = true;
-                dialogController.SpecialDialogGet(3f, "I burned the obsidian, this tone scares me");
+                dialogController.SpecialDialogGet(3f, "Somethings Wrong");
                 PlayAnimation();
+                cameraShake.CameraShakeStart(cameraShakeTime+2, cameraShakeStrong);
                 Debug.Log("Rituel Finish");
-                SceneManager.LoadScene("Level");
+                Invoke("GameFinish",cameraShakeTime+2);
+                
             }
             else if (!obsidienController.allObsidens[obsidienId])
             {
@@ -45,6 +48,7 @@ public class ObsidenScript : MonoBehaviour
                 {
                     dialogController.SpecialDialogGet(3f, "I burned the obsidian, this tone scares me");
                     PlayAnimation();
+                    cameraShake.CameraShakeStart(cameraShakeTime, cameraShakeWeak);
                 }
             }
         }
@@ -57,6 +61,10 @@ public class ObsidenScript : MonoBehaviour
     void DeleteFire()
     {
         Destroy(firendly);
+    }
+    void GameFinish()
+    {
+        SceneManager.LoadScene("Level");
     }
 
 }
