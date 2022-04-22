@@ -47,6 +47,7 @@ public class ObsidenScript : MonoBehaviour
             {
                 if (obsidienController.allObsidens[obsidienId - 1])
                 {
+                    obsidienController.allObsidens[obsidienId] = true;
                     dialogController.SpecialDialogGet(3f, "I burned the obsidian, this tone scares me");
                     PlayAnimation();
                     cameraShake.CameraShakeStart(cameraShakeTime, cameraShakeWeak);
