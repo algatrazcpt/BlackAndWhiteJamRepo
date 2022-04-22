@@ -24,7 +24,7 @@ public class DialogController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            DialogGet();
+            //DialogGet();
         }
     }
     void NextDialog()

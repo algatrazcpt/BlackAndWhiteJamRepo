@@ -4,6 +4,8 @@ using UnityEngine;
 using Cinemachine;
 public class CinemachineShakeController : MonoBehaviour
 {
+    public float time = 2f;
+    public float shake = 1.2f;
     public static CinemachineShakeController Instance;
     public CinemachineVirtualCamera virtualCamera;
     private void Awake()
@@ -11,10 +13,13 @@ public class CinemachineShakeController : MonoBehaviour
         Instance = this;
         virtualCamera = GetComponent<CinemachineVirtualCamera>();
     }
-    void Start()
+
+    public void CutSceneShake()
     {
-        
+        StopCoroutine(CameraShake(0,0));
+        StartCoroutine(CameraShake(time, shake));
     }
+
     public void CameraShakeStart(float time,float shakeStrenght)
     {
         CancelInvoke();
@@ -28,9 +33,4 @@ public class CinemachineShakeController : MonoBehaviour
         cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
