@@ -3,8 +3,9 @@ using UnityEngine.SceneManagement;
 public class ObsidenScript : MonoBehaviour
 {
     CinemachineShakeController cameraShake;
+    public bool isGamePlayLevel = true;
     public GameObject gamevinner;
-    public string Name = "";
+    public string Name = "GameFinish";
     public int obsidienId = 0;
     public float fireShowTime = 3f;
     public Animator animator;
@@ -35,11 +36,19 @@ public class ObsidenScript : MonoBehaviour
             else if (obsidienController.allObsidens[obsidienId - 1] && obsidienId == obsidienController.allObsidensSize - 1 && !obsidienController.allObsidens[obsidienId])
             {
                 obsidienController.allObsidens[obsidienId] = true;
-                dialogController.SpecialDialogGet(3f, "Somethings Wrong");
-                PlayAnimation();
+                if(isGamePlayLevel==true)
+                {
+                    dialogController.SpecialDialogGet(3f, "Somethins Wrong");
+                    PlayAnimation();
+                }
+                else
+                {
+                    dialogController.SpecialDialogGet(3f, "Finally over");
+                    PlayAnimation();
+                }
                 cameraShake.CameraShakeStart(cameraShakeTime+2, cameraShakeStrong);
                 Debug.Log("Rituel Finish");
-                Invoke("GameFinish",cameraShakeTime+2);
+                Invoke("GameFinish",2);
                 GameSaveSystem.SaveGame(0);
                 
             }

@@ -8,9 +8,10 @@ public class PlayerAllControls : MonoBehaviour
     public string sceneName = "Level";
     Animator animator;
     private Vector3 moveDelta;
-    private bool rituelCast;
+    public bool rituelCast;
     public GameObject fire;
     public DialogController dialogController;
+    private bool isMoveable = true;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -51,7 +52,10 @@ public class PlayerAllControls : MonoBehaviour
             //transform.localScale=new  Vector3(-1, 1,1);
             transform.localScale = new Vector3(-0.16f, 0.16f, 0.16f);
         }
-        transform.position += moveDelta * Time.deltaTime;
+        if (isMoveable)
+        {
+            transform.position += moveDelta * Time.deltaTime;
+        }
     }
     void GetFire()
     {
@@ -67,8 +71,9 @@ public class PlayerAllControls : MonoBehaviour
     }
     public void  PlayerDeath()
     {
+        isMoveable = false;
        animator.SetTrigger("PlayerDeathT");
-        Invoke("DeathScene", 1.5f);
+       Invoke("DeathScene", 1.5f);
     }
     public void DeathScene()
     {

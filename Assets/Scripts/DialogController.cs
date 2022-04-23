@@ -14,6 +14,7 @@ public class DialogController : MonoBehaviour
     int multiDialogCount = 0;
     public bool isMissionState = false;
     public FriendlyMagicControl magicControl;
+    public float multiDialogShowTime=1f;
     public void DialogGet()
     {
         dialogText.text = allDialogs[dialog›d];
@@ -53,7 +54,7 @@ public class DialogController : MonoBehaviour
         {
             multiDialogCount++;
             DialogGet();
-            yield return new WaitForSeconds(dialogShowtime +0.5f);
+            yield return new WaitForSeconds(dialogShowtime + multiDialogShowTime);
             StartCoroutine(MultiDialog());
         }
     }
